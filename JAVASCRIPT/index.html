@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Event Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-calendar-alt"></i> Community Event Portal</h1>
+            <div class="search-filter">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search events...">
+                </div>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="music">Music</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="sports">Sports</option>
+                </select>
+                <button id="addEventBtn" class="primary-btn">
+                    <i class="fas fa-plus"></i> Add Event
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="stats-container">
+            <div class="stat-card">
+                <i class="fas fa-users"></i>
+                <h3>Total Registrations</h3>
+                <p id="totalRegistrations">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Upcoming Events</h3>
+                <p id="upcomingEvents">0</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-ticket-alt"></i>
+                <h3>Available Seats</h3>
+                <p id="availableSeats">0</p>
+            </div>
+        </div>
+
+        <div class="events-section">
+            <div class="section-header">
+                <h2><i class="fas fa-calendar"></i> All Events</h2>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+            <div id="eventsContainer" class="events-grid"></div>
+        </div>
+
+        <div class="events-section">
+            <div class="section-header">
+                <h2><i class="fas fa-calendar-day"></i> Upcoming Events</h2>
+                <button id="viewAllUpcoming" class="secondary-btn">
+                    <i class="fas fa-list"></i> View All
+                </button>
+            </div>
+            <div id="upcomingEventsContainer" class="events-grid"></div>
+        </div>
+    </main>
+
+    <div id="registrationForm" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-plus"></i> Event Registration</h2>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="eventRegistration">
+                <div class="form-group">
+                    <label for="name">
+                        <i class="fas fa-user"></i> Name:
+                    </label>
+                    <input type="text" id="name" required>
+                    <span class="error-message" id="nameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email:
+                    </label>
+                    <input type="email" id="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="eventSelect">
+                        <i class="fas fa-calendar"></i> Select Event:
+                    </label>
+                    <select id="eventSelect" required></select>
+                    <span class="error-message" id="eventError"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">
+                        <i class="fas fa-check"></i> Register
+                    </button>
+                    <button type="button" class="secondary-btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="addEventForm" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Add New Event</h2>
+                <button class="close-btn" onclick="closeAddEventModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="newEventForm">
+                <div class="form-group">
+                    <label for="eventName">
+                        <i class="fas fa-tag"></i> Event Name:
+                    </label>
+                    <input type="text" id="eventName" required>
+                    <span class="error-message" id="eventNameError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="eventDate">
+                        <i class="fas fa-calendar"></i> Date:
+                    </label>
+                    <input type="date" id="eventDate" required>
+                    <span class="error-message" id="eventDateError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="eventCategory">
+                        <i class="fas fa-tags"></i> Category:
+                    </label>
+                    <select id="eventCategory" required>
+                        <option value="music">Music</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="sports">Sports</option>
+                    </select>
+                    <span class="error-message" id="eventCategoryError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="eventLocation">
+                        <i class="fas fa-map-marker-alt"></i> Location:
+                    </label>
+                    <input type="text" id="eventLocation" required>
+                    <span class="error-message" id="eventLocationError"></span>
+                </div>
+                <div class="form-group">
+                    <label for="eventSeats">
+                        <i class="fas fa-chair"></i> Total Seats:
+                    </label>
+                    <input type="number" id="eventSeats" min="1" required>
+                    <span class="error-message" id="eventSeatsError"></span>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">
+                        <i class="fas fa-plus"></i> Add Event
+                    </button>
+                    <button type="button" class="secondary-btn" onclick="closeAddEventModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="loadingSpinner" class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html> 

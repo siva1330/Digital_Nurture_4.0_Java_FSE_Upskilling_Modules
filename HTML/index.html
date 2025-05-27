@@ -1,0 +1,430 @@
+<!-- HTML5 Exercises: Local Community Event Portal - Home Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Event Portal - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* === Copy this CSS block to every HTML page for consistent styling === */
+    :root {
+      --primary: #5a67d8;
+      --secondary: #7f9cf5;
+      --accent: #f6ad55;
+      --bg: #f7fafc;
+      --white: #fff;
+      --text: #2d3748;
+      --shadow: 0 4px 24px rgba(90,103,216,0.12);
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--bg) 0%, #e9eafc 100%);
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      box-shadow: var(--shadow);
+      padding: 18px 0;
+      margin-bottom: 32px;
+      border-radius: 0 0 24px 24px;
+      animation: navFadeIn 1.2s cubic-bezier(.77,0,.18,1) 0.2s both;
+    }
+    @keyframes navFadeIn {
+      from { opacity: 0; transform: translateY(-30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      margin: 0 22px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.3s;
+      position: absolute;
+      left: 0; bottom: -6px;
+    }
+    nav a:hover, nav a:focus {
+      color: var(--accent);
+    }
+    nav a:hover::after, nav a:focus::after {
+      width: 100%;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(8px) saturate(120%);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 1.2s cubic-bezier(.77,0,.18,1) 0.4s both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    #welcomeBanner {
+      background: linear-gradient(90deg, var(--primary) 60%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 24px 32px;
+      border-radius: 18px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 16px rgba(90,103,216,0.10);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      animation: bannerPop 1s cubic-bezier(.77,0,.18,1) 0.6s both;
+    }
+    @keyframes bannerPop {
+      from { opacity: 0; transform: scale(0.95);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    #welcomeBanner span {
+      color: var(--accent) !important;
+      font-weight: 900;
+      font-size: 1.1em;
+      margin-left: 18px;
+      animation: pulse 1.5s infinite alternate;
+    }
+    @keyframes pulse {
+      from { text-shadow: 0 0 0 var(--accent);}
+      to { text-shadow: 0 0 12px var(--accent);}
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    h2 {
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #e9eafc;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 18px 12px;
+      margin-bottom: 18px;
+      background: #f0f4ff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(90,103,216,0.07);
+      animation: fadeIn 1.2s cubic-bezier(.77,0,.18,1) 0.8s both;
+    }
+    table caption {
+      caption-side: top;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    table img {
+      border: 3px solid var(--primary);
+      border-radius: 12px;
+      width: 120px;
+      height: 90px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(90,103,216,0.10);
+      transition: transform 0.3s, box-shadow 0.3s;
+      background: var(--white);
+    }
+    table img.highlight {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(246,173,85,0.18);
+      animation: imgGlow 1.5s infinite alternate;
+    }
+    @keyframes imgGlow {
+      from { box-shadow: 0 4px 16px rgba(246,173,85,0.18);}
+      to { box-shadow: 0 8px 32px rgba(246,173,85,0.32);}
+    }
+    table img:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px rgba(90,103,216,0.18);
+      z-index: 2;
+    }
+    form {
+      margin-top: 20px;
+      background: #f8fafc;
+      padding: 28px 32px;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(90,103,216,0.07);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeIn 1.2s cubic-bezier(.77,0,.18,1) 1s both;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="date"],
+    form textarea,
+    form select {
+      padding: 12px 14px;
+      border: 1.5px solid var(--secondary);
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      background: var(--white);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 1px 4px rgba(90,103,216,0.04);
+    }
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+      border-color: var(--primary);
+      outline: none;
+      box-shadow: 0 2px 12px rgba(90,103,216,0.10);
+    }
+    form textarea {
+      min-height: 60px;
+      resize: vertical;
+    }
+    form button {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(90,103,216,0.10);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+      letter-spacing: 1px;
+    }
+    form button:hover, form button:focus {
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      color: var(--primary);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 4px 16px rgba(246,173,85,0.12);
+    }
+    form output#confirmation {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 6px;
+      letter-spacing: 1px;
+      display: block;
+      min-height: 1.2em;
+      transition: color 0.3s;
+    }
+    #locationDisplay {
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 10px;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+      min-height: 1.2em;
+      transition: color 0.3s;
+    }
+    video {
+      display: block;
+      margin: 28px auto 0 auto;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(90,103,216,0.12);
+      width: 100%;
+      max-width: 480px;
+      background: #e9eafc;
+      transition: box-shadow 0.3s;
+    }
+    video:focus, video:hover {
+      box-shadow: 0 4px 32px rgba(90,103,216,0.18);
+      outline: none;
+    }
+    .highlight {
+      background: linear-gradient(90deg, var(--accent) 60%, #ffe8c2 100%);
+      color: #7b341e;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 1px 4px rgba(246,173,85,0.08);
+      animation: fadeIn 1.2s cubic-bezier(.77,0,.18,1) 1.2s both;
+    }
+    footer {
+      text-align: center;
+      padding: 24px 0 12px 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: var(--white);
+      border-radius: 24px 24px 0 0;
+      margin-top: 48px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      box-shadow: var(--shadow);
+      animation: navFadeIn 1.2s cubic-bezier(.77,0,.18,1) 1.2s both;
+    }
+    /* Dark mode styles */
+    body.dark-mode {
+      background: linear-gradient(135deg, #232946 0%, #121629 100%);
+      color: #eaeaea;
+    }
+    body.dark-mode main {
+      background: rgba(35,41,70,0.85);
+      color: #eaeaea;
+    }
+    body.dark-mode nav,
+    body.dark-mode footer {
+      background: linear-gradient(90deg, #232946, #121629);
+      color: #eaeaea;
+    }
+    body.dark-mode .highlight {
+      background: linear-gradient(90deg, #f6ad55 60%, #7f5a36 100%);
+      color: #fff;
+    }
+    body.dark-mode table {
+      background: #232946;
+    }
+    body.dark-mode form {
+      background: #232946;
+    }
+    body.dark-mode input,
+    body.dark-mode textarea,
+    body.dark-mode select {
+      background: #181b2a;
+      color: #eaeaea;
+      border-color: #7f9cf5;
+    }
+    body.dark-mode input:focus,
+    body.dark-mode textarea:focus,
+    body.dark-mode select:focus {
+      border-color: #f6ad55;
+    }
+    body.dark-mode video {
+      background: #181b2a;
+    }
+
+    /* Floating dark mode toggle button */
+    #darkModeToggle {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 1000;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      box-shadow: 0 4px 24px rgba(90,103,216,0.18);
+      cursor: pointer;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, transform 0.2s;
+    }
+    #darkModeToggle:hover {
+      background: linear-gradient(135deg, var(--accent), var(--secondary));
+      color: var(--primary);
+      transform: scale(1.08);
+    }
+    @media (max-width: 700px) {
+      #darkModeToggle {
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+      }
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 10px;
+        border-radius: 0;
+      }
+      #welcomeBanner {
+        flex-direction: column;
+        font-size: 1.1rem;
+        padding: 16px 10px;
+      }
+      table img {
+        width: 80px;
+        height: 60px;
+      }
+      form {
+        padding: 12px 6px;
+      }
+      video {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+   <a href="home.html">Home</a> |
+    <a href="events.html">Events</a> |
+    <a href="contact.html">Contact</a> |
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <!-- Main -->
+  <main>
+    <!-- Home Section -->
+    <section id="home">
+      <div id="welcomeBanner">
+        Welcome to the Community Portal!
+        <span style="color: red; font-weight: bold;">Special Offer!</span>
+      </div>
+      <p style="font-size:1.2em; margin-top:2em;">
+        Explore upcoming events, register, and connect with your local community.<br>
+        Use the navigation above to visit Events, Contact, or Help pages.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Local Community Council</p>
+  </footer>
+
+  <button id="darkModeToggle" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+
+  <script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.onclick = function() {
+      document.body.classList.toggle('dark-mode');
+
+      if(document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerText = '☀️';
+      } else {
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerText = '🌙';
+      }
+    };
+  
+    window.onload = function() {
+      const theme = localStorage.getItem('theme');
+      if(theme === 'dark') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.innerText = '☀️';
+      } else {
+        darkModeToggle.innerText = '🌙';
+      }
+    }
+  </script>
+
+</body>
+</html>
